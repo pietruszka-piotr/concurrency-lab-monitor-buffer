@@ -7,7 +7,7 @@ The program starts:
 - **1 consumer thread** (reader) that sums received values
 - **1 stats/monitor thread** printing the buffer snapshot and thread states every second
 
-Execution runs for **30 seconds**, then the application signals a graceful stop and prints the consumer’s final sum.
+Execution runs for **30 seconds**, then the application stops its threads and prints the consumer’s final sum. A value remaining in the buffer at shutdown is discarded; the sum includes only values already consumed.
 
 ## What it demonstrates
 
@@ -50,9 +50,10 @@ Runs as a **background thread** and prints every second:
 ## Running the program
 
 ### Requirements
-- .NET SDK (recommended: .NET 6+)
+- .NET 8 SDK or a newer SDK with .NET 8 runtime support
 
 ### Build & run
 ```bash
-dotnet build
-dotnet run
+dotnet build ConcurrentLab1.sln
+dotnet run --project ConcurrentLab1/ConcurrentLab1.csproj
+```
